@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import MyuseStateExample from "./components/MyuseStateExample";
 import Content from "./components/Content";
+import Footer from "./components/Footer";
 
 
 function App(){
@@ -9,7 +10,7 @@ function App(){
     <>
    {/* <div><ListGroup/></div>
   <div><MyuseStateExample/></div> */
-  <div><Content/></div>}
+  <div><Footer/></div>}
   </>
 )
 }
