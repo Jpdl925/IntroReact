@@ -9,6 +9,7 @@ const Alert = ({children}:AlertProps) => {
     <div className="alert alert-primary" role="alert">
     {children}
     </div>
+    
     </>
   )
 }

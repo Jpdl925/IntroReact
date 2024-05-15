@@ -1,21 +1,19 @@
 import { useState } from "react";
+import styles from  "./ListGroup.module.css";
 
-// Typescript has a feature called interface 
+// Typescript has a feature called interface
 // using an interface we can define the shape of our objects
 // {items: [], heading : string}
 interface ListProps {
-  items: string []
-  heading: string
-  onSelectedItem:(item:string) => void
+  items: string[];
+  heading: string;
+  onSelectedItem: (item: string) => void;
 }
-
 
 // rafce arrow function
 // rfce regular function
 
-const ListGroup = ({items,heading,onSelectedItem}:ListProps) => {
-  
-
+const ListGroup = ({ items, heading, onSelectedItem }: ListProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [name, setName] = useState("David");
@@ -61,16 +59,17 @@ const ListGroup = ({items,heading,onSelectedItem}:ListProps) => {
     <>
       <h1>{heading}</h1>
       {getMessage()}
-      <ul className="list-group">
+      <ul className={[styles.ListGroup,styles.container].join(' ')}>
         {items.map((item, index) => (
           <li
             className={
               selectedIndex == index
-                ? "list-group-item active"
-                : "list-group-item"
+                ? styles['listGroupItem active']
+                : styles['listGroupItem']
             }
             key={index}
-            onClick={() => {updateIndex(index)
+            onClick={() => {
+              updateIndex(index);
               onSelectedItem(item);
             }}
           >
