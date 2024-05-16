@@ -1,10 +1,12 @@
 import ListGroup from "./components/ListGroup/ListGroup";
-import MyuseStateExample from "./components/MyuseStateExample";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
-import Alert from "./components/Alert";
-import Buttons from "./components/Buttons";
+import MyuseStateExample from "./components/misc/MyuseStateExample";
+import Content from "./components/misc/Content";
+import Footer from "./components/misc/Footer";
+import Alert from "./components/misc/Alert";
+import Buttons from "./components/misc/Buttons";
+import Counter from "./components/Counter/Counter";
 import { BsCalendarDateFill } from "react-icons/bs";
+import { useState } from "react";
 
 
 function App() {
@@ -38,12 +40,38 @@ function App() {
     console.log("tClicked from our helper function");
   }
   const handleClick2 = () => {
-    console.log("tClicked from our helper function");
+  setAlertVisibile(!alertVisibile);
   }
   const handleClick3 = () => {
-    console.log("tClicked from our helper function");
+    setIsVisibile(true);
+    console.log(isVisibile);
   }
 
+  let count = 0;
+  const handleAgainClick = () => {
+    count++
+    console.log(count);
+  }
+
+  const handleClose = () => {
+    setAlertVisibile(false);
+  }
+
+  const [alertVisibile, setAlertVisibile] = useState(false);
+  const [isVisibile, setIsVisibile] = useState(false)
+
+
+  // const [firstName, setFirstName] = useState("Jose");
+  // const [lastName, setLastName] = useState("Martinez");
+
+  // const fullName = firstName + " " + lastName;
+
+  // use a useState and pass it in an object as the initial state
+
+  const [person, setPerson] = useState({
+    firstName: "Jose",
+    lastName: "Martinez"
+  })
 
   // return <div><Message/></div>
   return (
@@ -51,26 +79,24 @@ function App() {
       <div>
         <BsCalendarDateFill color="red" size={80}/>
 
-        <Alert>
+        {alertVisibile ? <Alert onClose={handleClose}>
           Passing in text as a child Alert!
-        </Alert>
+        </Alert> : null}
 
-
-        <Alert>
-          Passing in text as a child Alert part 2!
-        </Alert>
-
-
-        <Buttons   onClickFunction={handleClick1}>
-          One Button
+        <Buttons   onClickFunction={handleAgainClick}>
+          Count Example
         </Buttons>
         <Buttons color="secondary" onClickFunction={handleClick2}>
-          Two Button
+          Alert Button
         </Buttons>
-        <Buttons color="danger" onClickFunction={handleClick3}>
-          Three Button
+        <Buttons color="warning" onClickFunction={handleClick3}>
+          Visibile Button
         </Buttons>
+        <Buttons color="info" onClickFunction={handleClick3}>
+        four button
+        </Buttons> {person.firstName} {person.lastName}
 
+        <Counter/>
 
         <ListGroup onSelectedItem={handleSelectItem} items={items} heading="Cities"/>
 

@@ -9,7 +9,7 @@ interface ButtonProps{
 const Buttons = ({children,onClickFunction,color="dark"}:ButtonProps) => {
   return (
     <>
-      <button className={`btn btn-${color}`} onClick={onClickFunction}>
+      <button className={`btn btn-${color}`} onClick={onClickFunction} style={{margin: "20px"}}>
         {children}
       </button>
     </>
