@@ -7,7 +7,7 @@ import Buttons from "./components/misc/Buttons";
 import Counter from "./components/Counter/Counter";
 import { BsCalendarDateFill } from "react-icons/bs";
 import { useState } from "react";
-
+import Message from "./Message";
 
 function App() {
   let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
@@ -29,37 +29,34 @@ function App() {
     "Porsche",
     "Cadillac",
   ];
-  
 
-  const handleSelectItem = (item:string) => {
+  const handleSelectItem = (item: string) => {
     console.log(item);
-  }
-
+  };
 
   const handleClick1 = () => {
     console.log("tClicked from our helper function");
-  }
+  };
   const handleClick2 = () => {
-  setAlertVisibile(!alertVisibile);
-  }
+    setAlertVisibile(!alertVisibile);
+  };
   const handleClick3 = () => {
     setIsVisibile(true);
     console.log(isVisibile);
-  }
+  };
 
   let count = 0;
   const handleAgainClick = () => {
-    count++
+    count++;
     console.log(count);
-  }
+  };
 
   const handleClose = () => {
     setAlertVisibile(false);
-  }
+  };
 
   const [alertVisibile, setAlertVisibile] = useState(false);
-  const [isVisibile, setIsVisibile] = useState(false)
-
+  const [isVisibile, setIsVisibile] = useState(false);
 
   // const [firstName, setFirstName] = useState("Jose");
   // const [lastName, setLastName] = useState("Martinez");
@@ -70,22 +67,60 @@ function App() {
 
   const [person, setPerson] = useState({
     firstName: "Jose",
-    lastName: "Martinez"
-  })
+    lastName: "Martinez",
+  });
+
+  // learn how to update a object in our useState
+  const [drink, setDrink] = useState({
+    title: "Americano",
+    price: 8,
+  });
+
+  // Create a function to update the price of our drink object in our useState
+  const handleDrink = () => {
+    const newDrink = {
+      title: drink.title,
+      price: 10,
+    };
+    setDrink(newDrink);
+    console.log(drink);
+  };
+
+  // create a useState with nested objects and update a value
+  const [customer, setCustomer] = useState({
+    name: "Jose",
+    address: {
+      city: "Stockton",
+      zipCode: 94402,
+    },
+  });
+
+  // Create a function to handle updating a nested object, updating the zip code: 95212
+  const handleCustomer = () => {
+    setCustomer({
+      ...customer,
+      address: { ...customer.address, zipCode: 95212 },
+    });
+  };
 
   // return <div><Message/></div>
   return (
     <>
       <div>
-        <BsCalendarDateFill color="red" size={80}/>
-
-        {alertVisibile ? <Alert onClose={handleClose}>
-          Passing in text as a child Alert!
-        </Alert> : null}
-
-        <Buttons   onClickFunction={handleAgainClick}>
-          Count Example
+        {/* <Message/>
+      <Message/>
+      <Message/> */}
+        <BsCalendarDateFill color="red" size={80} />
+        {alertVisibile ? (
+          <Alert onClose={handleClose}>Passing in text as a child Alert!</Alert>
+        ) : null}
+        <Buttons onClickFunction={handleCustomer}>
+          Customer Update Button
         </Buttons>
+        <span>{customer.address.zipCode}</span>
+        <Buttons onClickFunction={handleDrink}>Drink Update</Buttons>
+        <span>{drink.price}</span>
+        <Buttons onClickFunction={handleAgainClick}>Count Example</Buttons>
         <Buttons color="secondary" onClickFunction={handleClick2}>
           Alert Button
         </Buttons>
@@ -93,20 +128,25 @@ function App() {
           Visibile Button
         </Buttons>
         <Buttons color="info" onClickFunction={handleClick3}>
-        four button
-        </Buttons> {person.firstName} {person.lastName}
-
-        <Counter/>
-
-        <ListGroup onSelectedItem={handleSelectItem} items={items} heading="Cities"/>
-
-
-        <ListGroup onSelectedItem={handleSelectItem} items={students} heading="Students List"/>
-
-
-        <ListGroup onSelectedItem={handleSelectItem} items={cars} heading="Cars List"/>
-
-
+          four button
+        </Buttons>{" "}
+        {person.firstName} {person.lastName}
+        <Counter />
+        <ListGroup
+          onSelectedItem={handleSelectItem}
+          items={items}
+          heading="Cities"
+        />
+        <ListGroup
+          onSelectedItem={handleSelectItem}
+          items={students}
+          heading="Students List"
+        />
+        <ListGroup
+          onSelectedItem={handleSelectItem}
+          items={cars}
+          heading="Cars List"
+        />
       </div>
       <div>
         <MyuseStateExample />
